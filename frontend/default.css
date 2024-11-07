@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    font-family: 'Poppins';
+}
+
+body{
+    width: 100%;
+    height: 100vh;
+	background-image: url('bg-login.jpeg');
+	background-attachment: fixed;
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+
+nav{
+    width: 100%;
+    height: 60px;
+    background-color: #FFF9F4;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.left{
+    width: 18%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.left .logo{
+    width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 20px;
+    margin-right: 15px;
+    font-size: 20px;
+    font-weight: 400;
+    color: #2D3436;
+}
+
+.left a{
+    padding: 8px;
+    text-decoration: none;
+    color: #2D3436;
+}
+
+.right{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.right > p{
+    margin-right: 10px;
+    color: #2D3436;
+}
+
+.right button{
+    margin-right: 20px;
+    background-color: #2D3436;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 7px;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.right button a {
+    text-decoration: none;
+    color: #F9CAA3;
+}
+
+button:hover, a:hover, input[type="submit"]:hover{
+    cursor: pointer;
+}
+
+.underline{
+    border-bottom: 2px solid #2D3436;
+}
