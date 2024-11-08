@@ -25,6 +25,42 @@
                 <button><a href="login.php">Logout</a></button>
             </section>
         </nav>
+        <section class="stats">
+            <div class="total-items">
+                <h2>Total Items</h2>
+                <p><?php echo count($data) ?></p>
+            </div>
+            <div class="max-qty">
+                <h2>Item with Maximum Quantity</h2>
+                <p>
+                    <?php 
+                        $max = 0;
+                        $n = count($data);
+                        for($i = 1; $i < $n; $i++)
+                        {
+                            if($data[$i]["qty"] > $data[$max]["qty"])
+                                $max = $i;
+                        }
+                        echo $data[$max]["name"] . " - " . $data[$max]["qty"];
+                    ?>
+                </p>
+            </div>
+            <div class="restock-needed">
+                <h2>Restock Needed</h2>
+                <p>
+                    <?php 
+                        $min = 0;
+                        $n = count($data);
+                        for($i = 1; $i < $n; $i++)
+                        {
+                            if($data[$i]["qty"] < $data[$min]["qty"])
+                                $min = $i;
+                        }
+                        echo $data[$min]["name"] . " - " . $data[$min]["qty"];
+                    ?>
+                </p>
+            </div>
+        </section>
         <section class="items">
             <h1>Items</h1>
             <section class="items-container">
