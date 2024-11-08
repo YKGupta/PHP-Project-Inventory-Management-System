@@ -1,0 +1,83 @@
+.items{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.items h1{
+    text-align: center;
+    font-size: 32px;
+    font-weight: 500;
+    color: #2D3436;
+}
+
+.items-container{
+    margin-top: 30px;
+    width: 65%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+    gap: 20px;
+}
+
+.card{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px 0px;
+    width: 100%;
+    height: 360px;
+    backdrop-filter: blur(10px);
+    background-color: #ffd38033;
+    border-radius: 7px;
+    border: 1px solid rgba(0, 0, 0, 0.175);
+    color: #212529;
+}
+
+.card > .badge{
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 10px;
+    height: 20px;
+    background-color: #DC3545;
+    border-radius: 10px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.card > img{
+    width: 90%;
+    margin-left: 5%;
+    border-radius: 7px;
+}
+
+.details{
+    margin-left: 10%;
+}
+
+.details > h2{
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.actions {
+    margin-top: 10px;
+}
+
+.actions i{
+    margin-right: 10px;
+    transition: 0.05s;
+}
+
+.actions i:hover{
+    scale: 1.1;
+}

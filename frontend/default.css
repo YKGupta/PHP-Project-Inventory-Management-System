@@ -76,10 +76,22 @@ nav{
     color: #F9CAA3;
 }
 
-button:hover, a:hover, input[type="submit"]:hover{
+button:hover, a:hover, input[type="submit"]:hover, i{
     cursor: pointer;
 }
 
 .underline{
     border-bottom: 2px solid #2D3436;
+}
+
+body::-webkit-scrollbar {
+	width: 5px;
+}
+
+body::-webkit-scrollbar-track {
+	background-color: #f8d1b0;
+}
+
+body::-webkit-scrollbar-thumb {
+	background-color: rgba(45, 52, 54, 1);
 }
