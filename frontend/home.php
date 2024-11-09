@@ -1,4 +1,11 @@
 <?php require('data.php') ?>
+<?php 
+    if(!isset($_COOKIE["ravi_traders_username"]))
+    {
+        header("Location: login.php");
+        die();
+    }
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -21,7 +28,7 @@
                 <a href="orders.php">Orders</a>
             </section>
             <section class="right">
-                <p>Hello, <strong><?php echo "Yash" ?></strong>!</p>
+                <p>Hello, <strong><?php echo $_COOKIE["ravi_traders_username"] ?></strong>!</p>
                 <button><a href="login.php">Logout</a></button>
             </section>
         </nav>
@@ -76,16 +83,33 @@
                                 <h2>' . $data[$i]["name"] . '</h2>
                                 <p>Price: ' . $data[$i]["price"] . '/' . $data[$i]["unit"] . '</p>
                                 <p>Quantity: ' . $data[$i]["qty"] . '</p>
-                                <div class="actions">
-                                    <i class="fa-solid fa-trash" aria-hidden="true"></i>
-                                    <i class="fa-solid fa-pen-to-square" aria-hidden="true"></i>
-                                </div>
+                                <div class="actions">';
+                                if($_COOKIE["ravi_traders_admin"] === "0")
+                                {
+                                    if($data[$i]["qty"] <= 0)
+                                        echo '<span class="not-in-stock">Not in stock</span>';
+                                    else
+                                        echo ' <span>Add to cart</span>
+                                    <i class="fa-solid fa-plus" aria-hidden="true"></i>';
+                                }
+                                else
+                                {
+                                    echo ' <i class="fa-solid fa-trash" aria-hidden="true"></i>
+                                    <i class="fa-solid fa-pen-to-square" aria-hidden="true"></i>';
+                                }
+                                echo '</div>
                             </section>
                         </section>
                         ';
                     }
                 ?>
             </section>
+        </section>
+        <section class="add-item">
+            <?php 
+                if($_COOKIE["ravi_traders_admin"] === "1")
+                    echo '<button>Add Item</button>';
+            ?>
         </section>
     </body>
 </html>

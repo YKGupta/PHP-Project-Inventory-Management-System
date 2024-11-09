@@ -1,3 +1,11 @@
+<?php 
+    if(!isset($_COOKIE["ravi_traders_username"]))
+    {
+        header("Location: login.php");
+        die();
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>

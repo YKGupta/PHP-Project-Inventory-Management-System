@@ -103,6 +103,15 @@
     margin-top: 10px;
 }
 
+.actions span{
+    margin-right: 10px;
+}
+
+.actions .not-in-stock{
+    font-size: 12.5px;
+    color: rgba(0, 0, 0, 0.5);
+}
+
 .actions i{
     margin-right: 10px;
     transition: 0.05s;
@@ -110,4 +119,22 @@
 
 .actions i:hover{
     scale: 1.1;
+}
+
+.add-item {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.add-item button {
+    padding: 10px;
+    margin: 0px 0px 10px 0px;
+    border-radius: 7px;
+    background-color: #2D3436;
+    border: none;
+    font-size: 16px;
+    font-weight: 400;
+    color: #F9CAA3;
 }
