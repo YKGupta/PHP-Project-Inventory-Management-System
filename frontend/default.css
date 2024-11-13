@@ -19,6 +19,9 @@ body{
 nav{
     width: 100%;
     height: 60px;
+    position: fixed;
+    top: 0px;
+    z-index: 2;
     background-color: #FFF9F4;
     display: flex;
     align-items: center;
@@ -56,6 +59,30 @@ nav{
     justify-content: space-evenly;
 }
 
+.right > i{
+    position: relative;
+    font-size: 24px;
+    color: #1c1f20;
+    margin: 0px 20px 0px 5px;
+}
+
+.right > i > .circle{
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    border: 1px solid black;
+    background-color: #FFF9F4;
+    color: #1c1f20;
+    font-size: 8.5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+}
+
 .right > p{
     margin-right: 10px;
     color: #2D3436;
@@ -69,11 +96,12 @@ nav{
     border-radius: 7px;
     font-size: 16px;
     font-weight: 400;
+    color: #F9CAA3;
 }
 
 .right button a {
-    text-decoration: none;
     color: #F9CAA3;
+    text-decoration: none;
 }
 
 button:hover, a:hover, input[type="submit"]:hover, i{
