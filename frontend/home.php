@@ -162,8 +162,9 @@
                                     if($data[$i]["qty"] <= 0)
                                         echo '<span class="not-in-stock">Not in stock</span>';
                                     else
-                                        echo ' <span>Add to cart</span>
-                                    <i class="fa-solid fa-plus" aria-hidden="true" data-id="' . $data[$i]["id"] . '" onclick="addToCart(event)"></i>';
+                                        echo '<i class="fa-solid fa-minus hide" aria-hidden="true" data-id="' . $data[$i]["id"] . '" data-qty="' . $data[$i]["qty"] . '" onclick="removeFromCart(event)"></i>
+                                    <span>Add to cart</span>
+                                    <i class="fa-solid fa-plus" aria-hidden="true" data-id="' . $data[$i]["id"] . '" data-qty="' . $data[$i]["qty"] . '" onclick="addToCart(event)"></i>';
                                 }
                                 else
                                 {
@@ -223,7 +224,7 @@
             const addToCart = (ev) => {
                 let f = -1;
                 const id = Number.parseInt(ev.target.getAttribute("data-id"));
-
+                const maxQty = Number.parseInt(ev.target.getAttribute("data-qty"));
                 for(let i = 0; i < selectedItems.length; i++)
                 {
                     if(selectedItems[i][0] === id)
@@ -236,11 +237,42 @@
                 if(f == -1)
                 {
                     selectedItems.push([ id, 1 ]);
-                    f =  selectedItems.length - 1;
+                    f = selectedItems.length - 1;
                 }
                 ev.target.previousElementSibling.innerHTML = selectedItems[f][1];
                 document.getElementById("cart-items").innerHTML = selectedItems.length;
                 document.getElementById("cart-items").parentElement.classList.remove('hide');
+                ev.target.previousElementSibling.previousElementSibling.classList.remove('hide');
+                if(selectedItems[f][1] === maxQty)
+                    ev.target.style.display = "none";
+            };
+
+            const removeFromCart = (ev) => {
+                let f = -1;
+                const id = Number.parseInt(ev.target.getAttribute("data-id"));
+                const maxQty = Number.parseInt(ev.target.getAttribute("data-qty"));
+                for(let i = 0; i < selectedItems.length; i++)
+                {
+                    if(selectedItems[i][0] === id)
+                    {
+                        selectedItems[i][1]--;
+                        f = i;
+                        break;
+                    }
+                }
+                ev.target.nextElementSibling.innerHTML = selectedItems[f][1];
+                ev.target.nextElementSibling.nextElementSibling.style.display = "inline-block";
+                
+                if(selectedItems[f][1] === 0)
+                {
+                    ev.target.nextElementSibling.innerHTML = "Add to cart";
+                    ev.target.classList.add('hide');
+                    selectedItems.splice(f, 1);
+                }
+
+                if(selectedItems.length === 0)
+                    document.getElementById("cart-items").parentElement.classList.add('hide');
+                document.getElementById("cart-items").innerHTML = selectedItems.length;
             };
 
             const goToCart = () => {

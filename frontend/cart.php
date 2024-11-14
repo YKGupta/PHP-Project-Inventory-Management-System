@@ -4,6 +4,11 @@
         header("Location: login.php");
         die();
     }
+    else if(!isset($_POST["_method"]))
+    {
+        header("Location: home.php");
+        die();    
+    }
 ?>
 <?php require('../backend/db.php') ?>
 <?php
@@ -27,29 +32,26 @@
     }
     $data = [];
     $k = 0;
-    if(isset($_POST["_method"]))
+    if($_POST["_method"] === "CART")
     {
-        if($_POST["_method"] === "CART")
+        $temp = $_POST["selectedItems"];
+        $selectedItems = [];
+        $x = count($temp);
+        $total = 0;
+        for($i = 0; $i < $x; $i++)
         {
-            $temp = $_POST["selectedItems"];
-            $selectedItems = [];
-            $x = count($temp);
-            $total = 0;
-            for($i = 0; $i < $x; $i++)
+            for($j = 0; $j < $n; $j++)
             {
-                for($j = 0; $j < $n; $j++)
+                if($temp[$i]["id"] === $ar[$j]["id"])
                 {
-                    if($temp[$i]["id"] === $ar[$j]["id"])
-                    {
-                        $total += $temp[$i]["qty"] * $ar[$j]["price"];
-                        $data[$k] = $ar[$j];
-                        $data[$k++]["qty"] = $temp[$i]["qty"];
-                        break;
-                    }
+                    $total += $temp[$i]["qty"] * $ar[$j]["price"];
+                    $data[$k] = $ar[$j];
+                    $data[$k++]["qty"] = $temp[$i]["qty"];
+                    break;
                 }
             }
-            $n = count($data);
         }
+        $n = count($data);
     }
 ?>
 
@@ -111,12 +113,22 @@
                     <p>ITEMS <?php echo $n ?></p>
                     <p>₹<?php echo $total ?></p>
                 </div>
-                <button>Place Your Order &rarr;</button>
+                <button onclick="placeOrder()">Place Your Order &rarr;</button>
             </section>
         </section>
         <!-- Logout -->
         <a hidden id="logoutLink" href="login.php"></a>
+        <!-- Order form -->
+        <form action="orders.php" method="post" id="order-form" hidden>
+            <input type="text" name="orderData" value='<?php echo json_encode($data) ?>'>
+            <input type="text" name="orderTotal" value='<?php echo $total ?>'>
+            <input type="text" name="_method" hidden value="POST">
+        </form>
         <script>
+            const placeOrder = () => {
+                const form = document.getElementById('order-form');
+                form.submit();
+            };
             const logout = () => {
                 document.cookie='ravi_traders_username=';
                 document.cookie='ravi_traders_email=';
