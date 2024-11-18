@@ -12,6 +12,13 @@
     {
         $query = "INSERT INTO orders(userId, items, totalPrice) VALUES('" . $_COOKIE["ravi_traders_email"] . "', '" . $_POST["orderData"] . "', " . $_POST["orderTotal"] . ")";
         mysqli_query($connection, $query);
+        $data = json_decode($_POST["orderData"], true);
+        $n = count($data);
+        for($i = 0; $i < $n; $i++)
+        {
+            $query = "UPDATE items SET qty = qty - " . $data[$i]["qty"] . " WHERE id = " . $data[$i]["id"];
+            mysqli_query($connection, $query);
+        }
     }
 ?>
 
@@ -62,7 +69,12 @@
         </nav>
         <section class="orders-container">
             <section class="title">
-                <h1>Your Orders</h1>
+                <h1><?php 
+                    if($_COOKIE["ravi_traders_admin"] === "1")
+                        echo "All";
+                    else
+                        echo "Your"
+                ?> Orders</h1>
                 <p><?php echo $n ?></p>
             </section>
             <section class="order-items">

@@ -96,51 +96,57 @@
             <form action="" method="post" id="editForm">
                 <input type="number" name="id" id="id" hidden>
                 <input type="text" name="name" id="name" placeholder="Name" required>
-                <input type="number" name="qty" id="qty" placeholder="Quantity" required>
+              <input type="text" name="unit" id="unit" placeholder="Unit" required>
+              <input type="number" name="qty" id="qty" placeholder="Quantity" required>
                 <input type="number" name="price" id="price" placeholder="Price per unit" required>
-                <input type="text" name="unit" id="unit" placeholder="Unit" required>
-                <input type="text" name="category" id="category" placeholder="Category" required>
+                    <input type="text" name="category" id="category" placeholder="Category" required>
                 <input type="text" name="imageURL" id="imageURL" placeholder="Image URL" required>
                 <input type="text" name="_method" hidden value="PUT">
                 <input type="submit" value="Update Item">
             </form>
         </section>
-        <section class="stats">
-            <div class="total-items">
-                <h2>Total Items</h2>
-                <p><?php echo count($data) ?></p>
-            </div>
-            <div class="max-qty">
-                <h2>Item with Maximum Quantity</h2>
-                <p>
-                    <?php 
-                        $max = 0;
-                        $n = count($data);
-                        for($i = 1; $i < $n; $i++)
-                        {
-                            if($data[$i]["qty"] > $data[$max]["qty"])
-                                $max = $i;
-                        }
-                        echo $data[$max]["name"] . " - " . $data[$max]["qty"];
-                    ?>
-                </p>
-            </div>
-            <div class="restock-needed">
-                <h2>Restock Needed</h2>
-                <p>
-                    <?php 
-                        $min = 0;
-                        $n = count($data);
-                        for($i = 1; $i < $n; $i++)
-                        {
-                            if($data[$i]["qty"] < $data[$min]["qty"])
-                                $min = $i;
-                        }
-                        echo $data[$min]["name"] . " - " . $data[$min]["qty"];
-                    ?>
-                </p>
-            </div>
-        </section>
+        <?php 
+            if($_COOKIE["ravi_traders_admin"] === "1")
+            {
+                $max = 0;
+                $min = 0;
+                $n = count($data);
+                for($i = 1; $i < $n; $i++)
+                {
+                    if($data[$i]["qty"] > $data[$max]["qty"])
+                        $max = $i;
+                    if($data[$i]["qty"] < $data[$min]["qty"])
+                        $min = $i;
+                }
+                echo '
+                    <section class="stats">
+                        <div class="total-items">
+                            <h2>Total Items</h2>
+                            <p>' . count($data) . '</p>
+                        </div>
+                        <div class="max-qty">
+                            <h2>Item with Maximum Quantity</h2>
+                            <p>' . 
+                                    $data[$max]["name"] . " - " . $data[$max]["qty"]
+                                . '
+                            </p>
+                        </div>
+                        <div class="restock-needed">
+                            <h2>Restock Needed</h2>
+                            <p>' .
+                                
+                                    $data[$min]["name"] . " - " . $data[$min]["qty"]
+                                . '
+                            </p>
+                        </div>
+                    </section>
+                ';
+            }
+            else
+            {
+                echo '<section class="stats"></section>';
+            }
+        ?>
         <section class="items">
             <h1>Items</h1>
             <section class="items-container">
